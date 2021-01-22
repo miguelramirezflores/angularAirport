@@ -1,0 +1,60 @@
+<div class="main-div">
+
+
+
+  <mat-card class="loginCard">
+    <mat-card-header>
+
+      <mat-card-title>iniciar sesión</mat-card-title>
+
+    </mat-card-header>
+    <img class="d-none d-md-block" src="../../../assets/images/logueo.jpg" alt="">
+    <mat-card-content>
+      <form [formGroup]='loginForm'>
+        <mat-form-field appearance='outline'>
+          <mat-label>usuario:</mat-label>
+          <input matInput placeholder=" Nombre Usuario" formControlName="usuario">
+
+          <ng-container *ngIf='loginForm.controls.usuario.errors != undefined'>
+            <div class="errorEnValidacion" *ngIf="loginForm.controls.usuario.errors.required">
+              introduce algun valor en el campo usuario
+            </div>
+            <div class="errorEnValidacion" *ngIf="loginForm.controls.usuario.errors.minlength">
+              introduce un valor mayor a 4 caracteres
+            </div>
+
+          </ng-container>
+
+        </mat-form-field>
+
+
+
+        <mat-form-field appearance='outline'> 
+           <mat-label>contraseña:</mat-label>   
+           <input matInput placeholder="Introduce tu contraseña" [type]="ocultarPassword ? 'password' : 'text'" formControlName='password'>
+           <button mat-icon-button matSuffix (click)="ocultarPassword = !ocultarPassword">
+              <mat-icon>{{ocultarPassword ? 'visibility_off': 'visibility' }}</mat-icon>
+           </button>
+
+           <ng-container *ngIf='loginForm.controls.password.errors != undefined'>
+            <div class="errorEnValidacion" *ngIf="loginForm.controls.password.errors.required">
+                el campo comtraseña es obligatorio
+            </div>
+            
+
+          </ng-container>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" [disabled]="loginForm.invalid"
+        (click)="autenticarUsuario()">entrar</button>
+
+    </mat-card-actions>
+  </mat-card>
+
+
+
+
+
+</div>
